@@ -1,0 +1,19 @@
+#maker {
+  cursor: pointer;
+}
+#makers {
+  width: 45%;
+  float: left;
+}
+#projects {
+  width: 45%;
+  float: right;
+}
+#headerID {
+  margin: auto;
+  text-align: center;
+  background: #34495e;
+}
+#featured{
+  text-align: center;
+}
