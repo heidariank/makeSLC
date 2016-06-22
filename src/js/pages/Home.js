@@ -11,8 +11,8 @@ export default class Home extends React.Component {
     super();
     // const m = ['Duane Johnson', 'Leonardo Da Vinci', 'samerbuna'];
     const m = [
-      {name: 'DUANE', text: 'Duane does a lot of things like makings stuff and coding.'},
-      {name: 'Leonardo', text: 'Leo invented the helicopter.'}
+      {name: 'DUANE', blurb: 'Duane does a lot of things like makings stuff and coding.', ID: "123"},
+      {name: 'Leonardo', blurb: 'Leo invented the helicopter.', ID: "1234"}
     ];
     var variableMakerList = m;
     const p = ['Arduino project', 'ESP server', 'Oak table', 'Hover board'];
@@ -49,7 +49,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const makers = this.state.variableMakerList.map((person, i) => <Maker key={i} title={person.name} text={person.text}/> );
+    const makers = this.state.variableMakerList.map((person) => <Maker key={person.ID} title={person.name} text={person.blurb} ID={person.ID}/> );
     const projects = this.state.variableProjectList.map((title, i) => <Project key={i} title={title}/> );
 
     return (
