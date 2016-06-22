@@ -5,15 +5,13 @@ import Maker from "../components/Maker";
 import Makers from "../components/Makers";
 import Project from "../components/Project";
 import Projects from "../components/Projects";
+import MakerStore from "../stores/MakerStore"
 
 export default class Home extends React.Component {
   constructor() {
     super();
-    // const m = ['Duane Johnson', 'Leonardo Da Vinci', 'samerbuna'];
-    const m = [
-      {name: 'DUANE', blurb: 'Duane does a lot of things like makings stuff and coding.', ID: "123"},
-      {name: 'Leonardo', blurb: 'Leo invented the helicopter.', ID: "1234"}
-    ];
+    this.getMakers = this.getMakers.bind(this);
+    const m = MakerStore.getAll();
     var variableMakerList = m;
     const p = ['Arduino project', 'ESP server', 'Oak table', 'Hover board'];
     var variableProjectList = p;
@@ -23,6 +21,14 @@ export default class Home extends React.Component {
         p: p,
         variableProjectList: variableProjectList,
     };
+  }
+
+  componentWillMount() {
+    MakerStore.on("change", this.getMakers);
+  }
+
+  componentWillUnmount() {
+    MakerStore.removeListener("change", this.getMakers);
   }
 
   changeMakers(maker){
@@ -48,8 +54,15 @@ export default class Home extends React.Component {
     this.setState(this.state.variableProjectList);
   }
 
+  getMakers() {
+    this.setState({
+      m: MakerStore.getAll(),
+    });
+  }
+
   render() {
-    const makers = this.state.variableMakerList.map((person) => <Maker key={person.ID} title={person.name} text={person.blurb} ID={person.ID}/> );
+    // const makers = this.state.variableMakerList.map((person) => <Maker key={person.ID} title={person.name} text={person.blurb} ID={person.ID}/> );
+    const makers = this.state.variableMakerList.map((person) => <Maker key={person.ID} {...person}/> );
     const projects = this.state.variableProjectList.map((title, i) => <Project key={i} title={title}/> );
 
     return (
