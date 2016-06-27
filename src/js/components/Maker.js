@@ -6,7 +6,7 @@ export default class Maker extends React.Component {
     const {name} = this.props;
     const {blurb} = this.props;
     const {ID}    = this.props;
-    var completePath = "/details/" + ID + "/";
+    var completePath = "/makerDetails/" + ID + "/";
     return (
       <div class="col-md-12" id="maker">
         <h4>{name}</h4>

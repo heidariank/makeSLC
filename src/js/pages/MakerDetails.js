@@ -2,7 +2,8 @@ import React from "react";
 
 import Project from "../components/Project";
 import Projects from "../components/Projects";
-import MakerStore from "../stores/MakerStore"
+import MakerStore from "../stores/MakerStore";
+import ProjectStore from "../stores/ProjectStore";
 
 export default class Details extends React.Component {
   constructor() {
@@ -35,14 +36,14 @@ export default class Details extends React.Component {
 
     var maker = {};
     for(var i = 0; i < this.state.makers.length; i++){
-    	console.log(i);
     	if(this.state.makers[i].ID == params.title){
     		maker = this.state.makers[i];
     		break;
     	}
     }
-    const projects = maker.projects.map((title, i) => <Project key={i} title={title}/> );
-    console.log(projects);
+    var projects = ProjectStore.getProjects(maker.ID);
+    projects = maker.projects.map((title, i) => <Project key={i} title={title}/> );
+    
     return (
     	<div>
       		<h1>{maker.name}</h1>
@@ -50,7 +51,8 @@ export default class Details extends React.Component {
       		<h4> {maker.blurb}</h4>
       		<h5> {maker.email}</h5>
       		<p> {maker.text}</p>
-      		<Projects projects={projects} />
+          <h1> {maker.ID} </h1>
+      		<Projects projects={projects} makerID={maker.ID}/>
       	</div>
     );
   }
