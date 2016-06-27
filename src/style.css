@@ -1,7 +1,4 @@
-#maker {
-  cursor: pointer;
-}
-#makers {
+#makers, #makerDetails {
   width: 45%;
   float: left;
 }

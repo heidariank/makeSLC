@@ -7,7 +7,7 @@ class ProjectStore extends EventEmitter{
 
 		this.projects = [
 	      {	
-	      	name: 'cool project', 
+	      	name: 'Automatic Taco Thrower', 
 	      	ID: "123", 
 	      	makerID: '123',
 	      	imageList: [
@@ -16,9 +16,36 @@ class ProjectStore extends EventEmitter{
 	      	]
 	  	  },
 	      {
-      		name: 'super cool project', 
-	      	ID: "1234", 
+      		name: 'Robot Monkey Trainer', 
+	      	ID: "12", 
 	      	makerID: '1234',
+	      	imageList: [
+	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
+	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
+	      	]
+	      },
+	      {
+      		name: 'Marracas', 
+	      	ID: "13", 
+	      	makerID: '1234',
+	      	imageList: [
+	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
+	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
+	      	]
+	      },
+	      {
+      		name: 'That Cool Electric Ball Thing', 
+	      	ID: "1236", 
+	      	makerID: '1235',
+	      	imageList: [
+	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
+	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
+	      	]
+	      },
+	      {
+      		name: 'Chinese Finger Trap', 
+	      	ID: "1237", 
+	      	makerID: '1235',
 	      	imageList: [
 	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
 	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}

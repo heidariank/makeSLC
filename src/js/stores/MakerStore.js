@@ -9,9 +9,9 @@ class MakerStore extends EventEmitter{
 	      	ID: "123", 
 	      	blurb: 'Duane does a lot of things like makings stuff and coding.',
 	      	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-	      	projects: [123],
+	      	projects: [123, 1234],
 	      	email: 'theRock@awesome.com',
-	      	image: 'no image yet'
+	      	image: '/images/Frink.jpg'
 	  	  },
 	      {
 	      	name: 'Leonardo da Vinci', 
@@ -19,9 +19,18 @@ class MakerStore extends EventEmitter{
 	      	blurb: 'Leo invented the helicopter.',
 	      	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 	      	projects: [1234],
-	      	email: 'theRock@awesome.com',
-	      	image: 'no image yet'
-	      }
+	      	email: 'letterByHorseback@awesome.com',
+	      	image: '/images/samer.jpg'
+	      },
+  	      {
+	      	name: 'Nicolai Tesla', 
+	      	ID: "1235", 
+	      	blurb: 'Tesla is a guy who likes to play the glockenspiel.',
+	      	text: 'Here is some more info about him.',
+	      	projects: [1236],
+	      	email: 'snailMail@awesome.com',
+	      	image: '/images/samer.jpg'
+	      },
 	    ];
 	}
 
