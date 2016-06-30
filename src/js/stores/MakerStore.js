@@ -1,61 +1,60 @@
 import { EventEmitter } from "events";
+import dispatcher from "../dispatcher";
 
 class MakerStore extends EventEmitter{
 	constructor(){
 		super();
-		this.makers = [
-	      {	
-	      	name: 'DUANE Johnson', 
-	      	ID: "123", 
-	      	blurb: 'Duane does a lot of things like makings stuff and coding.',
-	      	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-	      	projects: [123, 1234],
-	      	email: 'theRock@awesome.com',
-	      	image: '/images/Frink.jpg'
-	  	  },
-	      {
-	      	name: 'Leonardo da Vinci', 
-	      	ID: "1234", 
-	      	blurb: 'Leo invented the helicopter.',
-	      	text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-	      	projects: [1234],
-	      	email: 'letterByHorseback@awesome.com',
-	      	image: '/images/samer.jpg'
-	      },
-  	      {
-	      	name: 'Nicolai Tesla', 
-	      	ID: "1235", 
-	      	blurb: 'Tesla is a guy who likes to play the glockenspiel.',
-	      	text: 'Here is some more info about him.',
-	      	projects: [1236],
-	      	email: 'snailMail@awesome.com',
-	      	image: '/images/samer.jpg'
-	      },
-	    ];
+		var component = this;
+		this.makers = [];
+
+		fetch('/Makers.json')
+		    .then(function(response) {
+		        return response.json();
+		    }).then(function(json) {
+		        component.makers = json;
+		        component.emit("change");
+		    });
 	}
 
-	createMaker(name) {
-		const ID = Date.now();
+	createMaker(maker) {
+		this.makers.push(maker);
+		this.emit("change");
+	}
 
-		this.makers.push({
-			name,
-			ID,
-			blurb: 'dk',
-			text: 'klasjdflkja',
-			projects: [],
-			email: 'lkajjfncn nal',
-			image: 'no image'
-		});
-
+	deleteMaker(ID) {
+		var i = 0;
+		var amtToRemove = 0;
+		for (i = this.makers.length - 1; i >= 0; i--) {
+			if(this.makers[i].ID == ID){
+				amtToRemove = 1;
+				break;
+			}
+		}
+		this.makers.splice(i, amtToRemove);
 		this.emit("change");
 	}
 
 	getAll() {
+		console.log("makers in getAll", this.makers);
 		return this.makers;
+	}
+
+	handleActions(action){
+		switch(action.type){
+			case "CREATE_MAKER": {
+				this.createMaker(action.maker);
+				break;
+			}
+			case "DELETE_MAKER": {
+				this.deleteMaker(action.ID);
+				break;
+			}
+		}
 	}
 }
 
 const makerStore = new MakerStore;
+dispatcher.register(makerStore.handleActions.bind(makerStore));
 //uncomment this line to make makerStore global and thus have access to it through the console.
 //Add a new maker by typing makerStore.createMaker("Name") into the console
 // window.makerStore = makerStore; 

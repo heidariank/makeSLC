@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router";
+import * as MakerActions from "../actions/MakerActions";
 
 export default class Maker extends React.Component {
+  deleteMaker(){
+    MakerActions.deleteMaker(this.props.ID);
+  }
+
   render() {
     const {name} = this.props;
     const {blurb} = this.props;
@@ -15,6 +20,7 @@ export default class Maker extends React.Component {
         <img src={image} alt="img not found" width="80" />
         <p>{blurb}</p>
         <Link to={{ pathname: completePath }}>   Details </Link>
+        <button onClick={this.deleteMaker.bind(this)}> Delete </button>
         <hr/>
       </div>
     );
