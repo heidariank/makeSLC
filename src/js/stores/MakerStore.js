@@ -14,6 +14,7 @@ class MakerStore extends EventEmitter{
 		        component.makers = json;
 		        component.emit("change");
 		    });
+		console.log("makers in constructor", this.makers);
 	}
 
 	createMaker(maker) {
@@ -34,8 +35,16 @@ class MakerStore extends EventEmitter{
 		this.emit("change");
 	}
 
+	editMaker(maker) {
+		for (var i = this.makers.length - 1; i >= 0; i--) {
+			if(this.makers[i].ID == maker.ID){
+				this.makers[i] = maker;
+				break;
+			}
+		}
+	}
+
 	getAll() {
-		console.log("makers in getAll", this.makers);
 		return this.makers;
 	}
 
@@ -47,6 +56,10 @@ class MakerStore extends EventEmitter{
 			}
 			case "DELETE_MAKER": {
 				this.deleteMaker(action.ID);
+				break;
+			}
+			case "EDIT_MAKER": {
+				this.editMaker(action.ID);
 				break;
 			}
 		}

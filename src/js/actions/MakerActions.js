@@ -33,3 +33,10 @@ export function deleteMaker(ID) {
 		ID: ID
 	});
 }
+
+export function editMaker(maker) {
+		dispatcher.dispatch({
+			type: "EDIT_MAKER",
+			maker: maker
+		});
+}

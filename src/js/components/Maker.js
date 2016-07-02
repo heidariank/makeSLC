@@ -13,13 +13,15 @@ export default class Maker extends React.Component {
     const {ID}    = this.props;
     const {image} = this.props;
 
-    var completePath = "/makerDetails/" + ID + "/";
+    var makerDetailsPath = "/makerDetails/" + ID + "/";
+    var editMakerPath = "/addMaker/" + ID + "/";
     return (
       <div class="col-md-12" id="maker">
         <h4>{name}</h4>
         <img src={image} alt="img not found" width="80" />
         <p>{blurb}</p>
-        <Link to={{ pathname: completePath }}>   Details </Link>
+        <Link to={{ pathname: makerDetailsPath }}>   Details </Link>
+        <Link to={{ pathname: editMakerPath }}>   Edit </Link>
         <button onClick={this.deleteMaker.bind(this)}> Delete </button>
         <hr/>
       </div>

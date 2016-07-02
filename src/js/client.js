@@ -20,7 +20,7 @@ ReactDOM.render(
       <Route path="admin" name="admin" component={Admin}></Route>
       <Route name="makerDetails" path="makerDetails/:title" component={MakerDetails}></Route>
       <Route name="projectDetails" path="projectDetails/:title" component={ProjectDetails}></Route>
-      <Route name="addMaker" path="addMaker" component={AddMaker}></Route>
+      <Route name="addMaker" path="addMaker(/:title)" component={AddMaker}></Route>
     </Route>
   </Router>,
 app);
