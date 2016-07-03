@@ -9,10 +9,12 @@ export default class Makers extends React.Component {
   constructor() {
     super();
     this.getMakers = this.getMakers.bind(this);
-    var makerList = MakerStore.getAll();
+    const makerList = MakerStore.getAll();
+    var variableMakerList = makerList;
     
     this.state = {
         makerList: makerList,
+        variableMakerList: variableMakerList
     };
   }
 
@@ -26,6 +28,7 @@ export default class Makers extends React.Component {
 
   handleChange(e){
   	const maker = e.target.value;
+    console.log("maker: ", maker);
 
     var newMakers = [];
     for(var i = 0; i < this.state.makerList.length; i++){
@@ -33,13 +36,14 @@ export default class Makers extends React.Component {
         newMakers.push(this.state.makerList[i]);
       }
     }
-    this.state.makerList = newMakers;
-    this.setState(this.state.makerList);
+    // this.state.variableMakerList = newMakers;
+    this.setState({variableMakerList: newMakers});
   }
 
   getMakers() {
     this.setState({
       makerList: MakerStore.getAll(),
+      variableMakerList: MakerStore.getAll()
     });
   }
 
@@ -48,7 +52,8 @@ export default class Makers extends React.Component {
   }
 
 	render() {
-		const makers = this.state.makerList.map((person) => <Maker key={person.ID} {...person}/> );
+		const makers = this.state.variableMakerList.map((person) => <Maker key={person.ID} {...person}/> );
+    console.log("makers: ", makers);
 
 		return (
 		  <div class="well" id="makers">
