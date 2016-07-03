@@ -4,35 +4,9 @@ import * as MakerActions from "../actions/MakerActions";
 import MakerStore from "../stores/MakerStore";
 
 export default class AddMaker extends React.Component{
-	constructor(props) {
-		super(props);
-		this.getMakers = this.getMakers.bind(this);
-		const makers = MakerStore.getAll();
-		console.log("makers: ", makers);
-    var maker = {
-			name : "",
-			text : "",
-			email : "",
-			image : "",
-			ID : ""
-    };
-
-    const { params } = this.props;
-
-    for(var i = 0; i < makers.length; i++){
-    	if(makers[i].ID == params.title){
-    		maker = makers[i];
-    		break;
-    	}
-    }
-
-		this.state = {
-			makers: makers,
-			maker : maker
-		};
-	}
-
   componentWillMount() {
+  	this.getMakers = this.getMakers.bind(this);
+		this.getMakers();
     MakerStore.on("change", this.getMakers);
   }
 
@@ -46,8 +20,19 @@ export default class AddMaker extends React.Component{
   }
 
   getMakers() {
+  	var maker = {};
+  	const makers = MakerStore.getAll()
+  	const { params } = this.props;
+
+    for(var i = 0; i < makers.length; i++){
+    	if(makers[i].ID == params.title){
+    		maker = makers[i];
+    		break;
+    	}
+    }
     this.setState({
-      makers: MakerStore.getAll()
+      makers: makers,
+      maker: maker
     });
   }
   /*
@@ -97,7 +82,7 @@ export default class AddMaker extends React.Component{
 	}
 
 	handleSubmit(e){
-		if(this.state.maker.ID === 'undefined')
+		if(!this.state.maker.ID)
 			MakerActions.createMaker(this.state.maker);
 		else
 			MakerActions.editMaker(this.state.maker);
@@ -105,15 +90,6 @@ export default class AddMaker extends React.Component{
 
 
 	render() {
-		/*
-		 *I've put this code in render instead of the constructor so the component will render when getMakers actually 
-		 *returns data, otherwise the component will render with an empty makers. (async call returns after the constructor
-		 *returns). 
-		 *I use the following code snippet in a few places. It searches through a list till it finds the item. I would like
-		 *to make the list behave like a hashset so I could change the find operation to O(1) instead of O(n)
-		 */
-		
-
 		return(
 			<div>
 			  <h1>Add a new Maker here!</h1>
