@@ -14,7 +14,7 @@ class MakerStore extends EventEmitter{
 		        component.makers = json;
 		        component.emit("change");
 		    });
-		console.log("makers in constructor", this.makers);
+		//console.log("makers in constructor", this.makers);
 	}
 
 	createMaker(maker) {

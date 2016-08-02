@@ -90,6 +90,7 @@ export default class AddMaker extends React.Component{
 
 
 	render() {
+		var buttonText = (!this.state.maker.ID) ? "Create" : "Save";
 		return(
 			<div>
 			  <h1>Add a new Maker here!</h1>
@@ -102,7 +103,7 @@ export default class AddMaker extends React.Component{
 			  	<br/> <hr/>
 			  	<input type="text" placeholder="Image Path" value={this.state.maker.image} onChange={this.handleImageChange.bind(this)}/>
 			  	<br/> <hr/>
-			  	<input type="submit" value="Create"/>
+			  	<input type="submit" value={buttonText}/>
 		  	</form>	
 			</div>
 		);

@@ -17,10 +17,9 @@ export default class Maker extends React.Component {
     var editMakerPath = "/addMaker/" + ID + "/";
     return (
       <div class="col-md-12" id="maker">
-        <h4>{name}</h4>
+        <h4><Link to={{ pathname: makerDetailsPath }}>   {name} </Link> </h4>
         <img src={image} alt="img not found" width="80" />
         <p>{blurb}</p>
-        <Link to={{ pathname: makerDetailsPath }}>   Details </Link>
         <Link to={{ pathname: editMakerPath }}>   Edit </Link>
         <button onClick={this.deleteMaker.bind(this)}> Delete </button>
         <hr/>

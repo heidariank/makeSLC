@@ -6,15 +6,15 @@ export default class Project extends React.Component{
 		const { name } = this.props;
 		const {ID}    = this.props;
 		const { imageList }    = this.props;
+		const {blurb} = this.props;
 		var picturePath = imageList[0].picture;
-  	var completePath = "/projectDetails/" + ID + "/";
+  		var completePath = "/projectDetails/" + ID + "/";
 
 		return (
 	      <div class="col-md-12">
-	        <h4>{name}</h4>
+	        <h4><Link to={{ pathname: completePath }}>   {name} </Link></h4>
 	        <img src={picturePath} alt="img not found" width="100" />
-	        <p>This project is super neat and great and good!</p>
-	        <Link to={{ pathname: completePath }}>   Details </Link>
+	        <p>{blurb}</p>
 	        <hr/>
 	      </div>
 		);
