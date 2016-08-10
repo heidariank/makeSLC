@@ -103,6 +103,8 @@ export default class AddMaker extends React.Component{
 			  	<br/> <hr/>
 			  	<input type="text" placeholder="Image Path" value={this.state.maker.image} onChange={this.handleImageChange.bind(this)}/>
 			  	<br/> <hr/>
+			  	<input type="file" placeholder="Upload Image" value={this.state.maker.image} onChange={this.handleImageChange.bind(this)} accept="image/*"/>
+			  	<br/> <hr/>
 			  	<input type="submit" value={buttonText}/>
 		  	</form>	
 			</div>

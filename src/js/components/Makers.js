@@ -47,6 +47,8 @@ export default class Makers extends React.Component {
     });
   }
 
+  //I'm pretty sure this is superfluous
+  //TODO: Remove if the above statement is true.
   createMaker() {
     MakerActions.createMaker(Date.now().toString());
   }

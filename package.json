@@ -2,7 +2,7 @@
   "name": "makerspace",
   "version": "1.0.0",
   "description": "A website to help makers connect with one another.",
-  "main": "webpack.config.js",
+  "main": "config/webpack.config.js",
   "dependencies": {
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",

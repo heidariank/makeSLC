@@ -1,74 +1,40 @@
 import { EventEmitter } from "events";
+import dispatcher from "../dispatcher"; //CUI
 
 class ProjectStore extends EventEmitter{
 	constructor(){
 		super();
 		this.featuredID = 123;
 
-		this.projects = [
-	      {	
-	      	name: 'Automatic Taco Thrower', 
-	      	ID: "123", 
-	      	makerID: '123',
-	      	blurb: 'This thing really throws tacos!',
-	      	imageList: [
-	      		{picture: '/images/3D_printer.jpg', caption: 'text'},
-	      		{picture: '/images/3D_printer.jpg', caption: 'even more text'}
-	      	]
-	  	  },
-	      {
-      		name: 'Robot Monkey Trainer', 
-	      	ID: "12", 
-	      	makerID: '1234',
-	      	blurb: 'A robot that will train your monkey.',
-	      	imageList: [
-	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
-	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
-	      	]
-	      },
-	      {
-      		name: 'Marracas', 
-	      	ID: "13", 
-	      	makerID: '1234',
-	      	blurb: 'Shake them with vigor and passion to unlock their rhythmic mysteries!',
-	      	imageList: [
-	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
-	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
-	      	]
-	      },
-	      {
-      		name: 'That Cool Electric Ball Thing', 
-	      	ID: "1236", 
-	      	makerID: '1235',
-	      	blurb: 'You know that glass ball thing that you touch and the pink purple light follows your fingers.',
-	      	imageList: [
-	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
-	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
-	      	]
-	      },
-	      {
-      		name: 'Chinese Finger Trap', 
-	      	ID: "1237", 
-	      	makerID: '1235',
-	      	blurb: 'The harder you try to escape, the more trapped you will become.',
-	      	imageList: [
-	      		{picture: '/images/3D_printer.jpg', caption: 'I began with a 3d printer and some other stuff. I meditated every morning and ate lots of vegetables.'},
-	      		{picture: '/images/3D_printer.jpg', caption: 'The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it.'}
-	      	]
-	      }
-	    ];
+		//CUI
+		var component = this;
+		this.projects = [];
+
+		fetch('/Projects.json')
+		    .then(function(response) {
+		        return response.json();
+		    }).then(function(json) {
+		    		console.log("These are the projects you're looking for: ", json);
+		        component.projects = json;
+		        component.emit("change");
+		    });
+
+		    console.log("I bet projects is empty: ", this.projects);
+		//End of CUI
 	}
 
-	createProject(name) {
-		const ID = Date.now();
+	createProject(project) {
+		//CUI
+/*		const ID = Date.now();
 
 		this.projects.push({
 			name,
 			ID,
 			makerID: '123',
 			imageList: []
-		});
+		});*/
 
+		this.projects.push(project)
 		this.emit("change");
 	}
 
@@ -93,7 +59,18 @@ class ProjectStore extends EventEmitter{
 			}
 		return makersProjects;
 	}
+	
+	handleActions(action){
+		switch(action.type){
+			case "CREATE_PROJECT": {
+				this.createProject(action.project);
+				break;
+			}
+		}
+	}
 }
 
+
 const projectStore = new ProjectStore;
+dispatcher.register(projectStore.handleActions.bind(projectStore));//CUI
 export default projectStore;

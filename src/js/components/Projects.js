@@ -1,6 +1,7 @@
 import React from "react";
 
 import Project from "./Project";
+import * as ProjectActions from "../actions/ProjectActions";
 import ProjectStore from "../stores/ProjectStore"
 
 export default class Projects extends React.Component {
@@ -45,7 +46,20 @@ export default class Projects extends React.Component {
   getProjects() {
     this.setState({
       p: ProjectStore.getProjects(this.state.makerID),
+      variableProjectList: ProjectStore.getProjects(this.state.makerID)
     });
+  }
+
+  createProject() {
+    var proj = {
+      name: "Bob",
+      makerID: "123",
+      blurb: "This is just a test. Don't get excited",
+      imageList: [
+        {"picture": "/images/Frink.jpg", "caption": "The next step was to believe in myself and not have no in my heart. Life is a garden. Dig it."}
+      ]
+    };
+    ProjectActions.createProject(proj);
   }
 
 	render() {
@@ -58,6 +72,7 @@ export default class Projects extends React.Component {
           <input type="text" placeholder="Search for a Project" onChange={this.handleChange.bind(this)} />
           <hr/>
           <div >{projects}</div>
+          <button onClick={this.createProject.bind(this)}> Create </button>
         </div>
 		);
 	}

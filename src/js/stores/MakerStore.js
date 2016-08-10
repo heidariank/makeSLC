@@ -7,6 +7,9 @@ class MakerStore extends EventEmitter{
 		var component = this;
 		this.makers = [];
 
+		//TODO: From what I understand, the proper practice is to make all calls to the server
+		//from the Actions. I should move this to MakerActions.js if I want to stick to flux
+		//framework proper practices. 
 		fetch('/Makers.json')
 		    .then(function(response) {
 		        return response.json();
