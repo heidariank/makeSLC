@@ -1,0 +1,37 @@
+[
+    {
+        "name": "DUANE Johnson",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "image": "/images/Frink.jpg",
+        "ID": "123",
+        "blurb": "Duane does a lot of things like makings stuff and coding.",
+        "email": "theRock@awesome.com",
+        "projects": [
+            123,
+            1234
+        ]
+    },
+    {
+        "name": "Leonardo da Vinci",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "image": "/images/samer.jpg",
+        "ID": "1234",
+        "blurb": "Leo invented the helicopter.",
+        "email": "letterByHorseback@awesome.com",
+        "projects": [
+            1234
+        ]
+    },
+    {
+        "name": "Nicolai Teslaa",
+        "text": "Here is some more info about him.",
+        "image": "/images/samer.jpg",
+        "ID": "1235",
+        "blurb": "Tesla is a guy who likes to play the glockenspiel.",
+        "email": "snailMail@awesome.com",
+        "projects": [
+            1236
+        ]
+    },
+    {}
+]

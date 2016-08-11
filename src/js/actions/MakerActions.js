@@ -17,6 +17,35 @@ export function createMaker(maker) {
 	};
 
 	//make call to server
+	/*fetch('/api/makers', { method: 'POST', body: 'a=1' })
+		    .then(function(response) {
+		        return response.json();
+		    }).then(function(json) {
+		        console.log("json: ", json);
+		        //component.makers = json;
+		        //component.emit("change");
+		    });*/
+
+var request = new Request('/api/makers', {
+	method: 'POST', 
+	mode: 'cors', 
+	redirect: 'follow',
+	body: newMaker,
+	headers: new Headers({
+		'Content-Type': 'text/plain',
+		'Cache-Control': 'no-cache', 
+		'Access-Control-Allow-Origin': '*'
+	})
+});
+
+// Now use it!
+fetch(request).then(function(response) {
+		        return response.json();
+		    }).then(function(json) {
+		        console.log("json: ", json);
+		        //component.makers = json;
+		        //component.emit("change");
+		    });
 
 	dispatcher.dispatch({
 		type: "CREATE_MAKER",

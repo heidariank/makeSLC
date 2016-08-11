@@ -19,7 +19,6 @@ class ProjectStore extends EventEmitter{
 		        component.emit("change");
 		    });
 
-		    console.log("I bet projects is empty: ", this.projects);
 		//End of CUI
 	}
 

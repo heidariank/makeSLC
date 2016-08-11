@@ -13,12 +13,35 @@ import os
 import time
 from flask import Flask, Response, request
 
-app = Flask(__name__, static_url_path='', static_folder='public')
-app.add_url_rule('/', 'root', lambda: app.send_static_file('src/index.html'))
+app = Flask(__name__, static_url_path='', static_folder='src')
+app.add_url_rule('/', 'root', lambda: app.send_static_file('index.html'))
+app.debug = True
 
-#@app.route('/')
-#def test_method():
-#    return 'Hello'
+
+@app.route('/api/makers', methods=['GET', 'POST'])
+def makers_handler():
+    with open('src/Makers.json', 'r') as file:
+        makers = json.loads(file.read())
+
+    print('request: {}'.format(request))
+
+    if request.method == 'POST':
+        #newMaker = request.form.to_dict()
+        newMaker = request.args.to_dict()
+        print('newMaker: {}'.format(newMaker))
+        #newMaker['ID'] = int(time.time() * 1000)
+        makers.append(newMaker)
+
+        with open('Makers.json', 'w') as file:
+            file.write(json.dumps(makers, indent=4, separators=(',', ': ')))
+
+    return Response(json.dumps(makers), mimetype='application/json', headers={'Cache-Control': 'no-cache', 'Access-Control-Allow-Origin': '*'})
+
+@app.route('/api/projects', methods=['GET', 'POST'])    
+def projects_handler():
+    return 'Hiiiiiiiiiiiii'
+
+
 
 @app.route('/api/comments', methods=['GET', 'POST'])
 def comments_handler():
