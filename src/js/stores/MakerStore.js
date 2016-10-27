@@ -11,13 +11,15 @@ class MakerStore extends EventEmitter{
 		//from the Actions. I should move this to MakerActions.js if I want to stick to flux
 		//framework proper practices. 
 		//fetch('/Makers.json')
-		fetch('/api/makers')
+		fetch('/api/get_makers')
 		    .then(function(response) {
 		        return response.json();
 		    }).then(function(json) {
 		        component.makers = json;
 		        component.emit("change");
 		    });
+
+		//fetch('api/makers1');
 		//console.log("makers in constructor", this.makers);
 	}
 

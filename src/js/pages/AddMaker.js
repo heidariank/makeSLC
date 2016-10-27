@@ -2,24 +2,25 @@ import React from "react";
 
 import * as MakerActions from "../actions/MakerActions";
 import MakerStore from "../stores/MakerStore";
+import ImageUpload from "./ImageUpload"
 
 export default class AddMaker extends React.Component{
   componentWillMount() {
-  	this.getMakers = this.getMakers.bind(this);
-		this.getMakers();
-    MakerStore.on("change", this.getMakers);
+  	this.getMaker = this.getMaker.bind(this);
+	this.getMaker();
+    MakerStore.on("change", this.getMaker);
   }
 
   componentWillUnmount() {
-    MakerStore.removeListener("change", this.getMakers);
+    MakerStore.removeListener("change", this.getMaker);
   }
 
   componentDidMount() {
-  	this.getMakers();
-  	console.log(this.state.makers);
+  	this.getMaker();
+  	/*console.log(this.state.makers);*/
   }
 
-  getMakers() {
+  getMaker() {
   	var maker = {};
   	const makers = MakerStore.getAll()
   	const { params } = this.props;
@@ -30,84 +31,103 @@ export default class AddMaker extends React.Component{
     		break;
     	}
     }
-    this.setState({
-      makers: makers,
-      maker: maker
-    });
+    if(maker){
+	    this.setState({
+	    	name: maker.name,
+	      	ID: maker.ID,
+	      	blurb: maker.blurb,
+	      	email: maker.email,
+	      	image: maker.image
+	    });
+	}
   }
-  /*
-   * Event handlers have a lot of repeated code :(
-   * I had to copy existing data on every change because the change is not merged
-   * with the existing object; it overwrites it entirely. I think this is because
-   * it is a nested object.
-   */
+
 	handleNameChange(e){
 		this.setState({
-			maker: {name : e.target.value,
-			text: this.state.maker.text,
-			email: this.state.maker.email,
-			image: this.state.maker.image,
-			ID: this.state.maker.ID
-		}});
+			name: e.target.value
+		});
 	}
 
-	handleTextChange(e){
+	handleBlurbChange(e){
 		this.setState({
-			maker: {name : this.state.maker.name,
-			text: e.target.value,
-			email: this.state.maker.email,
-			image: this.state.maker.image,
-			ID: this.state.maker.ID
-		}});
+			blurb: e.target.value
+		});
 	}
 
 	handleEmailChange(e){
 		this.setState({
-			maker: {name : this.state.maker.name,
-			text: this.state.maker.text,
-			email: e.target.value,
-			image: this.state.maker.image,
-			ID: this.state.maker.ID
-		}});
+			email: e.target.value
+		});
 	}
 
 	handleImageChange(e){
 		this.setState({
-			maker: {name : this.state.maker.name,
-			text: this.state.maker.text,
-			email: this.state.maker.email,
-			image: e.target.value,
-			ID: this.state.maker.ID
-		}});
+			image: e.target.value
+		});
+	}
+
+	handleImageFileChange(e) {
+	    e.preventDefault();
+
+	    let reader = new FileReader();
+	    let file = e.target.files[0];
+
+	    reader.onloadend = () => {
+	      this.setState({
+	        file: file,
+	      });
+	    }
+
+	    /*reader.readAsDataURL(file)*/
+	    reader.readAsText(file);
+  }
+
+	handleImageSubmit(e){
+		e.preventDefault();
+		console.log(this.state.file);
 	}
 
 	handleSubmit(e){
-		if(!this.state.maker.ID)
-			MakerActions.createMaker(this.state.maker);
+		var maker = {
+			name: this.state.name,
+			ID: this.state.ID,
+			email: this.state.email,
+			blurb: this.state.blurb,
+			image: this.state.image,
+			file: this.state.file
+		};
+		if(!this.state.ID)
+			MakerActions.createMaker(maker);
 		else
-			MakerActions.editMaker(this.state.maker);
+			MakerActions.editMaker(maker);
 	}
 
 
 	render() {
-		var buttonText = (!this.state.maker.ID) ? "Create" : "Save";
+		var buttonText = (!this.state.ID) ? "Create" : "Save";
 		return(
 			<div>
 			  <h1>Add a new Maker here!</h1>
 			  <form className="commentForm" onSubmit={this.handleSubmit.bind(this)}>
-			  	<input type="text" placeholder="Maker's name" value={this.state.maker.name} onChange={this.handleNameChange.bind(this)}/>
+			  	<input type="text" name="name" placeholder="Maker's name" value={this.state.name} onChange={this.handleNameChange.bind(this)} required/>
 			  	<br/> <hr/>
-			  	<input type="text" placeholder="Description" value={this.state.maker.text} onChange={this.handleTextChange.bind(this)}/>
+			  	<input type="text" placeholder="Description" value={this.state.blurb} onChange={this.handleBlurbChange.bind(this)} required/>
 			  	<br/> <hr/>
-			  	<input type="text" placeholder="email" value={this.state.maker.email} onChange={this.handleEmailChange.bind(this)}/>
+			  	<input type="text" placeholder="email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} required/>
 			  	<br/> <hr/>
-			  	<input type="text" placeholder="Image Path" value={this.state.maker.image} onChange={this.handleImageChange.bind(this)}/>
+			  	<input type="text" placeholder="Image Path" value={this.state.image} onChange={this.handleImageChange.bind(this)}/>
 			  	<br/> <hr/>
+		  		<input className="fileInput" type="file" onChange={this.handleImageFileChange.bind(this)} accept="image"/>
 			  	<input type="submit" value={buttonText}/>
 		  	</form>	
+		  	<br/>
+        	<br/>
+		  	<form onSubmit={this.handleImageSubmit.bind(this)}>
+      			<button type="submit">Upload Image</button>
+        	</form>
 			</div>
 		);
 	}
-			  	/*<input type="file" placeholder="Upload Image" value={this.state.maker.image} onChange={this.handleImageChange.bind(this)} accept="image/*"/>
-			  	<br/> <hr/>*/
+          		/*<input type="file" encType="multipart/form-data" accept="image/*" />*/
+        	/*<ImageUpload />*/
 }

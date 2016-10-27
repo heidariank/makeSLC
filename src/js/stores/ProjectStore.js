@@ -14,7 +14,7 @@ class ProjectStore extends EventEmitter{
 		    .then(function(response) {
 		        return response.json();
 		    }).then(function(json) {
-		    		console.log("These are the projects you're looking for: ", json);
+		    		//console.log("These are the projects you're looking for: ", json);
 		        component.projects = json;
 		        component.emit("change");
 		    });
